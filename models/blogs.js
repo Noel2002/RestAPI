@@ -16,8 +16,8 @@ const blogSchema= new Schema({
     },
 
     blog_date:{
-        type: String,
-        required:[true, 'Please Enter the date']
+        type: Date,
+        default: Date.now
     }
 
     
