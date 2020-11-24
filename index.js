@@ -2,6 +2,9 @@ const  express= require('express');
 const routes= require('./routes/api');
 
 const bodyParser= require('body-parser');
+const multer= require('multer');
+
+const upload= multer();
 
 const mongoose= require('mongoose');
 
@@ -15,7 +18,8 @@ const app= express();
 
 //Body-parser middleware
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(upload.array());
 //Route handler middleware
 app.use('/api',routes);     
 
