@@ -13,7 +13,7 @@ const uploadToCloud = async (file, res) => {
       });
       return image;
     } catch (error) {
-      return Response.error(res, 500, error);
+      res.send(error);
     }
   };
 

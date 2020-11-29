@@ -9,15 +9,18 @@ const getBlogs= function(req,res,next){
     });
 }
 
-const postBlog= function(req,res, next){
-    //const image = await uploadToCloud(req.file, res);
-    Blog.create({
+const postBlog= async function(req,res, next){
+    const image = await uploadToCloud(req.file, res);
+    console.log(image);
+    await Blog.create({
         title: req.body.title,
         description: req.body.description,
-      //  img_url: image.url
+       img_url: image.url
     }).then(function(blog){
         res.send(blog);
     }).catch(next);
+    console.log(req.file);
+    res.send('Image Uploades succesfully');
 
     
 }

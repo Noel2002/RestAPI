@@ -1,5 +1,6 @@
 const  express= require('express');
 const router= express.Router();
+const upload= require('../services/multer');
 
 const Blog= require('../models/blogs');
 
@@ -12,7 +13,7 @@ const {getMessages,postMessages}= require('../controllers/contact');
 //Routing codes for blogs
 router.get('/blogs', getBlogs);
 
-router.post('/blogs', postBlog);
+router.post('/blogs',upload.single('BlogImg'),postBlog);
 
 router.put('/blogs/:id', updateBlog);
 

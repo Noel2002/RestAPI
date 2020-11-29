@@ -19,13 +19,14 @@ const app= express();
 //Body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(upload.array());
+//app.use(upload.array());
 //Route handler middleware
 app.use('/api',routes);     
 
 //Error handler middleware
 app.use(function(err, req, res, next){
-    res.status(422).send({Error: err.message});
+    res.status(422).send({Error: err});
+    console.log(err);
 });
 
 
