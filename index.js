@@ -2,6 +2,7 @@ const  express= require('express');
 const routes= require('./routes/api');
 
 const bodyParser= require('body-parser');
+const cookieParser= require('cookie-parser');
 const multer= require('multer');
 
 const upload= multer();
@@ -18,6 +19,7 @@ const app= express();
 
 //Body-parser middleware
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
 //app.use(upload.array());
 //Route handler middleware
@@ -31,6 +33,6 @@ app.use(function(err, req, res, next){
 
 
 
-app.listen(process.env.port || 3000, function(){
+app.listen(process.env.port || 1000, function(){
     console.log('Listening to the port now...');
 });
