@@ -9,6 +9,12 @@ const getBlogs= function(req,res,next){
     });
 }
 
+// const getSingleBlog= function(res,req,next){
+//     Blog.find({_id:req.params.id}).then(function(blog){
+//         res.send(blog);
+//     }).catch(next);
+   
+// }
 const postBlog= async function(req,res, next){
     const image = await uploadToCloud(req.file, res);
     console.log(image);
@@ -45,5 +51,6 @@ module.exports= {
     getBlogs,
     postBlog,
     updateBlog,
-    deleteBlog
+    deleteBlog,
+    //getSingleBlog
 }
