@@ -19,7 +19,7 @@ router.get('/blogs', getBlogs);
 
 router.post('/blogs', authenticate , upload.single('BlogImg'),postBlog);
 
-router.put('/blogs/:id', authenticate, updateBlog);
+router.put('/blogs/:id', authenticate, upload.single('BlogImg'), updateBlog);
 
 router.delete('/blogs/:id', authenticate, deleteBlog);
 

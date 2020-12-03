@@ -31,8 +31,13 @@ const postBlog= async function(req,res, next){
     
 }
 
-const updateBlog= function(req,res,next){
-    Blog.findByIdAndUpdate({_id:req.params.id}, req.body).then(function(blog){
+const updateBlog= async function(req,res,next){
+    const image = await uploadToCloud(req.file, res);
+    await Blog.findByIdAndUpdate({_id:req.params.id}, {
+        title: req.body.title,
+        description: req.body.description,
+        img_url: image.url
+    }).then(function(blog){
         Blog.findOne({_id:req.params.id}).then(function(blog){
             res.send(blog);
         });

@@ -49,4 +49,4 @@ const logoutGet= async function(req,res){
     res.send('logged out');
 }
 
-module.exports={signupPost, loginPost, logoutGet};
+module.exports={signupPost, loginPost, logoutGet, createToken};

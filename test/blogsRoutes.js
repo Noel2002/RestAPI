@@ -1,7 +1,13 @@
 const chai= require('chai');
+const fs= require('fs');
 const server= require('../index');
 const chaiHttp= require('chai-http');
 const { response } = require('express');
+const testdata={
+    title: 'blog1',
+    description: 'description 1',
+    img_url: 'https://res.cloudinary.com/nowo-ltd/image/upload/v1607030620/MY-BRAND/image_tjdrrz.jpg'
+};
 
 
 chai.should();
@@ -38,21 +44,21 @@ describe('test blog routes', ()=>{
         
     });
 
-    // describe('test GET /api/blogs/:id', ()=>{
+    describe('test POST /api/blogs', ()=>{
        
-    //     it("It should return specific blog", (done)=>{
-    //         const blogId='5fb62444d798311dcc87afe6';
-    //         chai.request(server)
-    //         .get('/api/blogs/' + blogId)
-    //         .end((err,response)=>{
-    //             response.should.have.status(200);
-    //             response.body.should.be.a('object');
-    //         done();    
-    //         });
+        it("It should create a new blog", (done)=>{
+            chai.request(server)
+            .post('/api/blogs')
+            .send(testdata)
+            .end((err,response)=>{
+                response.should.have.status(200);
+                response.body.should.be.a('object');
+            done();    
+            });
 
-    //     });           
+        });           
         
         
-    // });
+    });
 });
 

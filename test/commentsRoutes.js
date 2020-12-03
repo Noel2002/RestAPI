@@ -3,6 +3,7 @@ const server= require('../index');
 const chaiHttp= require('chai-http');
 const { response } = require('express');
 const Comment= require('../models/comments');
+let commentID='';
 
 const testcomment= {
     sender: 'Dudu',
@@ -55,8 +56,18 @@ describe('test comments routes', ()=>{
             .end((err,response)=>{
                 response.should.have.status(200);
                 response.should.have.be.a('object');
-                // response.should.have.property('sender');
-                // response.should.have.property("sender");
+                response.body.should.have.property('sender');
+                response.body.should.have.property("content");
+                commentID=response.body._id;
+                //console.log(messageID);
+                Comment.findByIdAndDelete(commentID, function (err, docs) { 
+                    if (err){ 
+                        console.log(err) 
+                    } 
+                    else{ 
+                        console.log("Deleted!"); 
+                    } 
+                });
 
 
                 done();

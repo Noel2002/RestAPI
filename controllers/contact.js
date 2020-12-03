@@ -4,7 +4,7 @@ const Message= require('../models/contact');
 
 const getMessages= function(req,res,next){
     Message.find({}).then(function(messages){
-        res.send(messages);
+        res.status(200).json(messages);
     });
 }
 
