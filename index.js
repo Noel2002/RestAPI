@@ -4,12 +4,18 @@ const routes= require('./routes/api');
 const bodyParser= require('body-parser');
 const cookieParser= require('cookie-parser');
 const multer= require('multer');
+const {REALDB}= require('./config/env');
 
 const upload= multer();
 
 const mongoose= require('mongoose');
 
-mongoose.connect('mongodb://localhost/blogPosts');
+// mongoose.connect('mongodb://localhost/blogPosts');
+
+mongoose.connect(REALDB, {useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true, 
+    useFindAndModify: false});
 
 mongoose.Promise= global.Promise;
 

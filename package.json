@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
-    "test": " mocha ./test/**.js --timeout 5000 --exit",
+    "test": " mocha ./test/**.js --timeout 50000 --exit",
     "coverage": "nyc npm test",
     "coveralls":"nyc report --reporter=text-lcov | coveralls"
   },

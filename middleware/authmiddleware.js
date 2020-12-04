@@ -1,11 +1,13 @@
 const jwt= require('jsonwebtoken');
+const {JWT_KEY}= require('../config/env');
+
 
 
 const authenticate= function(req,res,next){
     const token= req.headers.authorisation;
 
     if( token ){
-        jwt.verify(token, 'my token secret', (err, decodedToken)=>{
+        jwt.verify(token, JWT_KEY, (err, decodedToken)=>{
             if( err ){
                 console.log(err);
                 res.status(401).send('Please login!');

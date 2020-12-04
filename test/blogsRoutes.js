@@ -81,13 +81,24 @@ describe('test blog routes', ()=>{
 			  fs.readFileSync('./test/file/image.jpg'), 'image.jpg')
             .end((err,response)=>{
                 console.log('####################'+ token);
-                response.should.have.status(200);
+                response.should.have.status(201);
                 response.body.should.be.a('object');
                 blogID= response.body._id;
             done();    
             });
 
-        });           
+        });      
+        
+        it("It should create a specific blog", (done)=>{
+            chai.request(server)
+            .get('/api/blogs/' + blogID)
+            .end((err,response)=>{
+                response.should.have.status(200);
+                response.body.should.be.a('object');
+            done();    
+            });
+
+        });     
         
         
     });

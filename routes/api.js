@@ -4,7 +4,7 @@ const upload= require('../services/multer');
 
 const Blog= require('../models/blogs');
 
-const {getBlogs, /*getSingleBlog ,*/postBlog,updateBlog,deleteBlog}= require('../controllers/blogs');
+const {getBlogs, getSingleBlog ,postBlog,updateBlog,deleteBlog}= require('../controllers/blogs');
 const {getComments,postComment}= require('../controllers/comments');
 const {getMessages,postMessages}= require('../controllers/contact');
 const {signupPost, loginPost, logoutGet}= require("../controllers/authcontroller");
@@ -13,9 +13,10 @@ const { authenticate }= require('../middleware/authmiddleware');
 
 
 //Routing codes for blogs
+router.get('/blogs/:id', getSingleBlog);
+
 router.get('/blogs', getBlogs);
 
-// router.get('/blogs/:id', getSingleBlog);
 
 router.post('/blogs', authenticate , upload.single('BlogImg'),postBlog);
 

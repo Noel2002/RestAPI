@@ -9,12 +9,14 @@ const getBlogs= function(req,res,next){
     });
 }
 
-// const getSingleBlog= function(res,req,next){
-//     Blog.find({_id:req.params.id}).then(function(blog){
-//         res.send(blog);
-//     }).catch(next);
+
+
+const getSingleBlog= function(req,res, next){
+    Blog.findOne({_id:req.params.id}).then(function(blog){
+        res.status(200).json(blog);
+    }).catch(next);
    
-// }
+}
 const postBlog= async function(req,res, next){
     const image = await uploadToCloud(req.file, res);
     console.log(image);
@@ -23,7 +25,7 @@ const postBlog= async function(req,res, next){
         description: req.body.description,
        img_url: image.url
     }).then(function(blog){
-        res.send(blog);
+        res.status(201).json(blog);
     }).catch(next);
     console.log(req.file);
     res.send('Image Uploades succesfully');
@@ -57,5 +59,5 @@ module.exports= {
     postBlog,
     updateBlog,
     deleteBlog,
-    //getSingleBlog
+    getSingleBlog
 }
