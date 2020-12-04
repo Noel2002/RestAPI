@@ -3,9 +3,9 @@ const jwt= require('jsonwebtoken');
 const Message= require('../models/contact');
 const server= require('../index');
 const chaiHttp= require('chai-http');
-const { response } = require('express');
-const {createToken}= require('../controllers/authcontroller');
 let messageID='';
+let token='';
+const agent = chai.request.agent(server);
 
 const testmessage= {
     sender: 'Mucyo',
@@ -18,7 +18,6 @@ const validuser={
     password: 'test123'
 };
 
-const token= createToken(validuser._id);
 
 chai.should();
 
@@ -30,18 +29,64 @@ describe('test messages routes', ()=>{
     //test GET request
 
     describe('test GET /api/messages', ()=>{
-        
+        // beforeEach(function(done){
+            
+        // })
+        it('it should login', (done)=>{
+            chai.request(server)
+               .post('/api/login')
+               .send({
+                   username: 'aime',
+                   password: 'test123'
+               })
+               .end((err,response)=>{
+                   response.should.have.status(200);
+                   response.should.have.be.a('object');
+                   token= response.body.token;
+                  //  response.body.should.have.property('username').eql('Kaberi');
+                  //  response.body.should.have.property("password").eql('noel123');
+                  //  userID=response.body._id;
+                  //  console.log(messageID);
+                //    User.findByIdAndDelete(userID, function (err, docs) { 
+                //        if (err){ 
+                //            console.log(err) 
+                //        } 
+                //        else{ 
+                //            console.log("Deleted!"); 
+                //        } 
+                //    }); 
+   
+                   done();
+               });
+         });
+
+               
         it("It should return all messages", (done)=>{
             chai.request(server)
             .get('/api/messages')
+            .set('authorisation', token)
             .end((err,response)=>{
                 response.should.have.status(200);
+                response.body.should.be.a('array');
+               // response.body.should.have.property('sender');
+            done();    
+            });
+
+        });
+
+        it("It should not allow user to return all messages", (done)=>{
+            chai.request(server)
+            .get('/api/messages')
+            .end((err,response)=>{
+                response.should.have.status(401);
                 response.body.should.be.a('object');
                // response.body.should.have.property('sender');
             done();    
             });
 
         });
+
+        
 
         it('it should display an error', (done)=>{
             chai.request(server)

@@ -34,8 +34,10 @@ const loginPost= async function(req,res){
 
        const user= await User.login(username,password);
        const token= createToken(user._id);
-       res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
-       res.status(200).json(user._id);
+    //    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+
+        
+       res.status(200).json({username, token});
         
     } catch (error) {
         res.status(400).send("Incorrect username or password");

@@ -2,22 +2,22 @@ const jwt= require('jsonwebtoken');
 
 
 const authenticate= function(req,res,next){
-    const token= req.cookies.jwt;
+    const token= req.headers.authorisation;
 
     if( token ){
         jwt.verify(token, 'my token secret', (err, decodedToken)=>{
             if( err ){
                 console.log(err);
-                res.send('Please login!');
+                res.status(401).send('Please login!');
             }
             else{
-                console.log(decodedToken);
+                //console.log(decodedToken);
                 next();
             }
         })
     }
     else{
-        res.send('Please login!');
+        res.status(401).send('Please login!');
     }
 }
 
