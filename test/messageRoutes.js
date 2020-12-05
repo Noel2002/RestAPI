@@ -36,7 +36,7 @@ describe('test messages routes', ()=>{
             chai.request(server)
                .post('/api/login')
                .send({
-                   username: 'aime',
+                   username: 'test',
                    password: 'test123'
                })
                .end((err,response)=>{

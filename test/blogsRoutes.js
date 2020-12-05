@@ -19,7 +19,7 @@ describe('test blog routes', ()=>{
             chai.request(server)
                .post('/api/login')
                .send({
-                   username: 'aime',
+                   username: 'test',
                    password: 'test123'
                })
                .end((err,response)=>{
@@ -89,7 +89,7 @@ describe('test blog routes', ()=>{
 
         });      
         
-        it("It should create a specific blog", (done)=>{
+        it("It should return a specific blog", (done)=>{
             chai.request(server)
             .get('/api/blogs/' + blogID)
             .end((err,response)=>{

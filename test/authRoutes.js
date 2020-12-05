@@ -8,12 +8,12 @@ let userID='';
 
 const validUser= {
    username: 'Kaberi',
-   password: 'noel123'
+   password: 'test123'
 };
 
 const invalidUser= {
-   username: 'aime',
-   password: ''
+   username: 'test1',
+   password: 'gft'
 };
 const nonexistingUser={
    username: 'Kabebe',
@@ -34,7 +34,7 @@ describe('# Testing authentication routes', ()=>{
                 response.should.have.status(201);
                 response.should.have.be.a('object');
                 response.body.should.have.property('username').eql('Kaberi');
-                response.body.should.have.property("password").eql('noel123');
+                response.body.should.have.property("password");
                 userID=response.body._id;
                 //console.log(messageID);
                //  User.findByIdAndDelete(userID, function (err, docs) { 
